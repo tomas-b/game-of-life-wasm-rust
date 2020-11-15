@@ -69,10 +69,12 @@ const drawCells = () => {
 
 let animation = false;
 
+const ticks = document.querySelector('#ticks');
+
 const renderLoop = () => {
   drawGrid();
   drawCells();
-  universe.tick();
+  for(let i = 0; i < ticks.value; i++) universe.tick();
   animation = requestAnimationFrame(renderLoop);
 };
 

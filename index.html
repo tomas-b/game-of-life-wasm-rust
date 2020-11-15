@@ -11,17 +11,17 @@
     * {margin:0}
     html {height: 100%}
     body {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        margin:5%;
         background: #111;
     }
-    button { margin:5px; padding:2px 8px; border:1px solid white; color: white; background:black; }
+    button { margin:5px; padding:2px; width: 40px; border:1px solid white; color: white; background:black; }
     </style>
 
-    <button>▶</button>
     <canvas></canvas>
+    <div id='controls'>
+        <button>▶</button>
+        <input id='ticks' type='range' min='1' max='20' value='1'/>
+    </div>
     <script src="main.js"></script>
 
 </body>
