@@ -2,6 +2,13 @@ extern crate wasm_bindgen;
 use std::fmt;
 use wasm_bindgen::prelude::*;
 
+extern crate web_sys;
+macro_rules! log {
+    ( $( $t:tt )* ) => {
+        web_sys::console::log_1(&format!( $( $t )* ).into());
+    }
+}
+
 #[wasm_bindgen]
 #[repr(u8)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -76,6 +83,7 @@ impl Universe {
     pub fn new() -> Universe {
         let width = 100;
         let height = 80;
+        log!("{}x{}", width, height);
 
         // let cells = (0..width * height)
         //     .map(|i| {
