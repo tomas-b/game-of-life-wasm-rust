@@ -3,7 +3,7 @@ import * as wasm from "./gol-lib/Cargo.toml";
 const {Universe, Cell} = wasm
 const memory = wasm.default.wasm.memory
 
-const CELL_SIZE = 12
+const CELL_SIZE = 6;
 const [GRID_COLOR, DEAD_COLOR, ALIVE_COLOR] = ["#333", "#000", "#FFF"];
 
 const universe = Universe.new();
@@ -87,3 +87,24 @@ playBtn.addEventListener('click', e => {
     renderLoop();
   }
 })
+
+ drawGrid();
+ drawCells();
+
+canvas.addEventListener("click", event => {
+  const boundingRect = canvas.getBoundingClientRect();
+
+  const scaleX = canvas.width / boundingRect.width;
+  const scaleY = canvas.height / boundingRect.height;
+
+  const canvasLeft = (event.clientX - boundingRect.left) * scaleX;
+  const canvasTop = (event.clientY - boundingRect.top) * scaleY;
+
+  const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), h- 1);
+  const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), w- 1);
+
+  universe.toggle_cell(row, col);
+
+  drawGrid();
+  drawCells();
+});
