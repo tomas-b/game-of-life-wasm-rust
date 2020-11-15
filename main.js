@@ -67,11 +67,23 @@ const drawCells = () => {
   ctx.stroke();
 };
 
+let animation = false;
+
 const renderLoop = () => {
   drawGrid();
   drawCells();
   universe.tick();
-  requestAnimationFrame(renderLoop);
+  animation = requestAnimationFrame(renderLoop);
 };
 
-renderLoop();
+const playBtn = document.querySelector('button')
+
+playBtn.addEventListener('click', e => {
+  playBtn.textContent = animation ? "▶" : "⏸";
+  if ( animation ) {
+    cancelAnimationFrame(animation);
+    animation = false;
+  } else {
+    renderLoop();
+  }
+})
