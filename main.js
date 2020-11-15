@@ -3,7 +3,7 @@ import * as wasm from "./gol-lib/Cargo.toml";
 const {Universe, Cell} = wasm
 const memory = wasm.default.wasm.memory
 
-const CELL_SIZE = 4
+const CELL_SIZE = 12
 const [GRID_COLOR, DEAD_COLOR, ALIVE_COLOR] = ["#333", "#000", "#FFF"];
 
 const universe = Universe.new();
@@ -68,11 +68,9 @@ const drawCells = () => {
 };
 
 const renderLoop = () => {
-  universe.tick();
-
   drawGrid();
   drawCells();
-
+  universe.tick();
   requestAnimationFrame(renderLoop);
 };
 

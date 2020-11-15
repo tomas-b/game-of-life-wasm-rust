@@ -77,21 +77,40 @@ impl Universe {
         let width = 100;
         let height = 80;
 
-        let cells = (0..width * height)
-            .map(|i| {
-                if i % 2 == 0 || i % 7 == 0 {
-                    Cell::Alive
-                } else {
-                    Cell::Dead
-                }
-            })
-            .collect();
+        // let cells = (0..width * height)
+        //     .map(|i| {
+        //         if i % 2 == 0 || i % 7 == 0 {
+        //             Cell::Alive
+        //         } else {
+        //             Cell::Dead
+        //         }
+        //     })
+        //     .collect();
+
+        // single glider
+        let glider = vec![(1, 2), (2, 3), (3, 1), (3, 2), (3, 3)];
+        let mut cells: Vec<Cell> = (0..width * height).map(|_i| Cell::Dead).collect();
+
+        for (row, col) in glider.iter().cloned() {
+            let idx = (row * width + col) as usize;
+            cells[idx] = Cell::Alive;
+        }
 
         Universe {
             width,
             height,
             cells,
         }
+    }
+
+    pub fn set_width(&mut self, width: u32) {
+        self.width = width;
+        self.cells = (0..width * self.height).map(|_i| Cell::Dead).collect();
+    }
+
+    pub fn set_height(&mut self, height: u32) {
+        self.height = height;
+        self.cells = (0..self.width * height).map(|_i| Cell::Dead).collect();
     }
 
     pub fn render(&self) -> String {
