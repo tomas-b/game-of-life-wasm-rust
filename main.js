@@ -95,6 +95,7 @@ drawCells();
 
 let indexPointer = 0;
 document.querySelector('#pointers').addEventListener('click', e => {
+  if(e.target.tagName!=='button') return;
   indexPointer = (e.target.getAttribute('data-index'));
   document.querySelectorAll('#pointers button').forEach(e => e.classList.remove('selected'))
   e.target.classList.add('selected');
