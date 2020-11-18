@@ -78,7 +78,7 @@ const renderLoop = () => {
   animation = requestAnimationFrame(renderLoop);
 };
 
-const playBtn = document.querySelector('button')
+const playBtn = document.querySelector('#playbtn')
 
 playBtn.addEventListener('click', e => {
   playBtn.textContent = animation ? "▶" : "⏸";
@@ -90,8 +90,29 @@ playBtn.addEventListener('click', e => {
   }
 })
 
- drawGrid();
- drawCells();
+drawGrid();
+drawCells();
+
+let indexPointer = 0;
+document.querySelector('#pointers').addEventListener('click', e => {
+  indexPointer = (e.target.getAttribute('data-index'));
+  document.querySelectorAll('#pointers button').forEach(e => e.classList.remove('selected'))
+  e.target.classList.add('selected');
+});
+
+let drawElement = (row, col) => {
+  let coords = [
+    // 0: pointer
+    [[0,0]],
+    // 1: glider
+    [[1,0],[2,1],[0,2],[1,2],[2,2] ],
+    // 2: cross
+    [[0,0],[-1,0],[1,0],[0,-1],[0,1]]
+  ][indexPointer].map( p => {
+    universe.toggle_cell(row+p[0], col+p[1])
+  });
+
+}
 
 canvas.addEventListener("click", event => {
   const boundingRect = canvas.getBoundingClientRect();
@@ -105,7 +126,8 @@ canvas.addEventListener("click", event => {
   const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), h- 1);
   const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), w- 1);
 
-  universe.toggle_cell(row, col);
+  //universe.toggle_cell(row, col);
+  drawElement(row, col);
 
   drawGrid();
   drawCells();

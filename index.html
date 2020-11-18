@@ -15,11 +15,18 @@
         background: #111;
     }
     button { margin:5px; padding:2px; width: 40px; border:1px solid white; color: white; background:black; }
+    button:hover { cursor:pointer; }
+    .selected:before { content:  "! "; color:red }
     </style>
 
     <canvas></canvas>
     <div id='controls'>
-        <button>▶</button>
+        <div id='pointers'>
+            <button class='selected' data-index=0>point</button>
+            <button data-index=1 id='glider'>glider</button>
+            <button data-index=2 id='cross'>cross</button>
+        </div>
+        <button id='playbtn'>▶</button>
         <input id='ticks' type='range' min='1' max='20' value='1'/>
     </div>
     <script src="main.js"></script>
