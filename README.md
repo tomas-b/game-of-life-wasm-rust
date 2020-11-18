@@ -5,7 +5,7 @@
 
 ![run](.readme/run3.gif)
 
-# [live demo](https://tomas-b.github.io/gol-demo/)
+# [live demo](https://tomas-b.github.io/demos/gol/)
 
 
 
