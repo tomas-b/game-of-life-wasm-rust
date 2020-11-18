@@ -3,7 +3,7 @@
 
 `/ $ parcel index.html`
 
-![run](.readme/run2.gif)
+![run](.readme/run3.gif)
 
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
